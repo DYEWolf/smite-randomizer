@@ -1,11 +1,14 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { GodsComponent } from '../gods/gods.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { Pantheon } from 'src/app/models/pantheon';
 import { ButtonModule } from 'primeng/button';
+import { GodService } from 'src/app/services/god.service';
+import { God } from 'src/app/models/god';
+import { Pantheon } from 'src/app/models/pantheon';
+import { GodClass } from 'src/app/models/god-class';
 
 @Component({
   selector: 'smite-randomizer-home',
@@ -22,39 +25,29 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
-  pantheon: Pantheon[] = [
-    { name: 'Arthurian' },
-    { name: 'Babylonian' },
-    { name: 'Celtic' },
-    { name: 'Chinese' },
-    { name: 'Egyptian' },
-    { name: 'Great Old Ones' },
-    { name: 'Greek' },
-    { name: 'Hindu' },
-    { name: 'Japanese' },
-    { name: 'Maya' },
-    { name: 'Norse' },
-    { name: 'Polynesian' },
-    { name: 'Roman' },
-    { name: 'Slavic' },
-    { name: 'Voodoo' },
-    { name: 'Yoruba' },
-  ];
+export class HomeComponent implements OnInit {
+  selectedPlayers: number = 1;
+  selectedPantheon: Pantheon = { name: '' };
+  selectedClass: GodClass = { name: '' };
+  godsClasses!: GodClass[];
+  godsPantheons!: Pantheon[];
+  gods!: God[];
+  filteredGods!: God[];
 
-  godClass = [
-    { name: 'Hunter' },
-    { name: 'Warrior' },
-    { name: 'Assassin' },
-    { name: 'Guardian' },
-    { name: 'Mage' },
-  ];
+  constructor(private godService: GodService) {}
 
-  selectionType: string = 'single-player';
-  selectedPantheon: undefined;
-  selectedClass: undefined;
+  ngOnInit(): void {
+    this.gods = this.godService.getGods();
+    this.godsPantheons = this.godService.getPantheon();
+    this.godsClasses = this.godService.getClass();
+  }
 
   generate() {
-    console.log(this.selectedClass, this.selectionType, this.selectedPantheon);
+    const params = {
+      class: this.selectedClass?.name ? this.selectedClass.name : '',
+      pantheon: this.selectedPantheon?.name ? this.selectedPantheon?.name : '',
+      players: this.selectedPlayers,
+    };
+    this.filteredGods = this.godService.randomizeGame(params);
   }
 }

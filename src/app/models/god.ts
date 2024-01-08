@@ -38,8 +38,8 @@ interface Summary {
   pros: string;
   difficulty: string;
   release_date: string;
-  favor?: number;
-  gems?: number;
+  favor?: number | null | undefined;
+  gems?: number | null | undefined;
   voicelines: string;
   voice_actor: string;
 }

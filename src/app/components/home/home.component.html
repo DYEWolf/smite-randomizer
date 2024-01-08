@@ -1,43 +1,41 @@
 <header class="text-center">
     <img class="-mt-6" ngSrc="/assets/smite.svg" alt="smite logo" width="200" height="200" priority>
 </header>
-<h1 class="text-center -mt-6">Game Randomizer</h1>
+<h1 class="text-center -mt-6">1v1 Game Randomizer</h1>
 
-<div class="flex justify-content-center mb-3">
-    <div class="description">
-        <p class="text-center">A simple way to randomize your smite games, just select the number of users you want to
-            randomize a god for
-            the
-            game
-            and click generate, as
-            optional you can customize the gods by pantheon, type or class.</p>
+<div class="flex flex-column align-items-center">
+    <p class="description text-center line-height-3">A simple way to randomize your smite 1v1 games, just select the
+        number
+        of users you
+        want to
+        randomize a god for
+        the
+        game
+        and click generate, as
+        optional you can customize the gods by <span class="font-bold">pantheon</span> or <span
+            class="font-bold">class</span>.</p>
+    <div class="flex justify-content-around radio-buttons mb-3">
+        <div>
+            <p-radioButton name="type" value="1" [(ngModel)]="selectedPlayers" inputId="single-player"></p-radioButton>
+            <label for="single-player" class="ml-2">One player</label>
+        </div>
+
+        <div>
+            <p-radioButton name="type" value="2" [(ngModel)]="selectedPlayers" inputId="two-player"></p-radioButton>
+            <label for="two-player" class="ml-2">Two players</label>
+        </div>
     </div>
-</div>
 
-<div class="card flex justify-content-center">
-
-    <div class="flex flex-wrap gap-3">
-        <div class="flex align-items-center">
-            <p-radioButton name="type" value="single-player" [(ngModel)]="selectionType"
-                inputId="single-player"></p-radioButton>
-            <label for="single-player" class="ml-2">Single Player</label>
-        </div>
-
-        <div class="flex align-items-center">
-            <p-radioButton name="type" value="two-player" [(ngModel)]="selectionType"
-                inputId="two-player"></p-radioButton>
-            <label for="two-player" class="ml-2">Two Player</label>
-        </div>
-
-        <p-dropdown [options]="pantheon" [(ngModel)]="selectedPantheon" optionLabel="name" [showClear]="true"
+    <div class="flex flex-column md:flex-row gap-3">
+        <p-dropdown [options]="godsPantheons" [(ngModel)]="selectedPantheon" optionLabel="name" [showClear]="true"
             placeholder="Select a Pantheon (optional)"></p-dropdown>
 
-        <p-dropdown [options]="godClass" [(ngModel)]="selectedClass" optionLabel="name" [showClear]="true"
+        <p-dropdown [options]="godsClasses" [(ngModel)]="selectedClass" optionLabel="name" [showClear]="true"
             placeholder="Select a Class (optional)"></p-dropdown>
-
     </div>
+    <p-button class="flex justify-content-center mt-4" label="Generate" (click)="generate()"></p-button>
 </div>
-<p-button class="flex justify-content-center mt-4" label="Generate" (click)="generate()"></p-button>
 
-
-<smite-randomizer-gods></smite-randomizer-gods>
+@if (filteredGods) {
+<smite-randomizer-gods [gods]="filteredGods"></smite-randomizer-gods>
+}

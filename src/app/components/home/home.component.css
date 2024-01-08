@@ -3,5 +3,9 @@ h1 {
 }
 
 .description {
-    width: 900px;
+    width: 70vw;
+}
+
+.radio-buttons {
+    width: 300px;
 }
