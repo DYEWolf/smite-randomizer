@@ -1,0 +1,16 @@
+<div class="card flex justify-content-center">
+    <p-card header="Player {{players}}" [style]="{ width: '360px', height: '280px' }">
+        <div class="flex flex-column gap-3 justify-content-between">
+            <p-dropdown [options]="godsPantheons" [(ngModel)]="selectedPantheon" optionLabel="name" [showClear]="true"
+                placeholder="Select pantheon (optional)" (onChange)="pantheon.emit(selectedPantheon)"></p-dropdown>
+
+            <p-dropdown [options]="godsClasses" [(ngModel)]="selectedClass" optionLabel="name" [showClear]="true"
+                placeholder="Select class (optional)" (onChange)="class.emit(selectedClass)"></p-dropdown>
+        </div>
+        <p><span class="font-bold">God: </span>{{god?.name}}</p>
+        @if (god) {
+        <p>{{god.summary.class}}, {{god.summary.pantheon}}</p>
+        }
+
+    </p-card>
+</div>

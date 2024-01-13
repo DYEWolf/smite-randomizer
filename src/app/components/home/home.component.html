@@ -4,7 +4,7 @@
 <h1 class="text-center -mt-6">1v1 Game Randomizer</h1>
 
 <div class="flex flex-column align-items-center">
-    <p class="description text-center line-height-3">A simple way to randomize your smite 1v1 games, just select the
+    <!--  <p class="description text-center line-height-3">A simple way to randomize your smite 1v1 games, just select the
         number
         of users you
         want to
@@ -13,7 +13,7 @@
         game
         and click generate, as
         optional you can customize the gods by <span class="font-bold">pantheon</span> or <span
-            class="font-bold">class</span>.</p>
+            class="font-bold">class</span>.</p> -->
     <div class="flex justify-content-around radio-buttons mb-3">
         <div>
             <p-radioButton name="type" value="1" [(ngModel)]="selectedPlayers" inputId="single-player"></p-radioButton>
@@ -25,17 +25,23 @@
             <label for="two-player" class="ml-2">Two players</label>
         </div>
     </div>
+    <div class="flex flex-column md:flex-row gap-3 mb-3">
+        <p-button class="flex justify-content-center " label="Generate player 1" (click)="generateP1()"></p-button>
+        @if (selectedPlayers == 2) {
+        <p-button class="flex justify-content-center " label="Generate player 2" (click)="generateP2()"></p-button>
+        }
+    </div>
+
+
 
     <div class="flex flex-column md:flex-row gap-3">
-        <p-dropdown [options]="godsPantheons" [(ngModel)]="selectedPantheon" optionLabel="name" [showClear]="true"
-            placeholder="Select a Pantheon (optional)"></p-dropdown>
-
-        <p-dropdown [options]="godsClasses" [(ngModel)]="selectedClass" optionLabel="name" [showClear]="true"
-            placeholder="Select a Class (optional)"></p-dropdown>
+        <smite-randomizer-gods-card [players]="1" [godsClasses]="godsClasses" [godsPantheons]="godsPantheons"
+            [god]="godP1" (pantheon)="onSelectedPantheonP1($event)"
+            (class)="onSelectedClassP1($event)"></smite-randomizer-gods-card>
+        @if (selectedPlayers == 2) {
+        <smite-randomizer-gods-card [players]="2" [godsClasses]="godsClasses" [godsPantheons]="godsPantheons"
+            [god]="godP2" (pantheon)="onSelectedPantheonP2($event)"
+            (class)="onSelectedClassP2($event)"></smite-randomizer-gods-card>
+        }
     </div>
-    <p-button class="flex justify-content-center mt-4" label="Generate" (click)="generate()"></p-button>
 </div>
-
-@if (filteredGods) {
-<smite-randomizer-gods [gods]="filteredGods"></smite-randomizer-gods>
-}

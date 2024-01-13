@@ -6,7 +6,6 @@ import gods from '../../assets/gods.json';
 interface params {
   class: string;
   pantheon: string;
-  players: number;
 }
 
 @Injectable({
@@ -75,12 +74,7 @@ export class GodService {
 
   randomizeGame(parameters: params) {
     const currentArray = [...this.gods];
-    const filters = {
-      pantheon: parameters.pantheon,
-      class: parameters.class,
-    };
-    const filteredGods = this.filterGodsByProperties(currentArray, filters);
-    console.log(filteredGods);
-    return [filteredGods[this.randomNumberGod(filteredGods.length - 1)]];
+    const filteredGods = this.filterGodsByProperties(currentArray, parameters);
+    return filteredGods[this.randomNumberGod(filteredGods.length - 1)];
   }
 }
