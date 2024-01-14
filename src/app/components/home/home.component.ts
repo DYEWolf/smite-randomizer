@@ -3,7 +3,6 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { GodsComponent } from '../gods/gods.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { GodService } from 'src/app/services/god.service';
@@ -18,7 +17,6 @@ import { GodsCardComponent } from '../gods-card/gods-card.component';
   imports: [
     CommonModule,
     NgOptimizedImage,
-    GodsComponent,
     RadioButtonModule,
     FormsModule,
     DropdownModule,
