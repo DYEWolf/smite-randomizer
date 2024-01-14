@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "smite-randomizer",
+      "public": "./dist/smite-randomizer/browser",
+      "frameworksBackend": {}
+    }
+  ]
+}

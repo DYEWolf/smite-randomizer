@@ -81,6 +81,25 @@
         "buildTarget": "smite-randomizer:build",
         "staticFilePath": "dist/smite-randomizer/browser"
       }
+    },
+    "deploy": {
+      "executor": "@angular/fire:deploy",
+      "options": {
+        "version": 2,
+        "firebaseProject": "smite-randomizer-36ec9",
+        "firebaseHostingSite": "smite-randomizer-36ec9"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "smite-randomizer:build:production",
+          "serveTarget": "smite-randomizer:serve:production"
+        },
+        "development": {
+          "buildTarget": "smite-randomizer:build:development",
+          "serveTarget": "smite-randomizer:serve:development"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   }
 }

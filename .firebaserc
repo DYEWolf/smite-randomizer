@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "smite-randomizer-36ec9": {
+      "hosting": {
+        "smite-randomizer": [
+          "smite-randomizer-36ec9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "smite-randomizer-36ec9"
+  }
+}
